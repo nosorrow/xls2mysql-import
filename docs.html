@@ -148,6 +148,22 @@ $importer-&gt;table = &#39;heavy_metal&#39;;
 if($importer-&gt;truncate() == 0){
     echo &#39;Успешно изтриване на данните&#39;;
 }</code></pre>
+                    <h5 id="използване-на-helper---xls2mysql">Използване на Helper -&gt; xls2mysql</h5>
+                    <p>Може да изполвате и функцията <code>xls2mysql(array config, string path-to-file, string dbtablename , array fields)</code></p>
+                    <pre><code class="language-php">&lt;?php
+
+require_once &#39;src/vendor/autoload.php&#39;;
+$config = include_once &#39;config.php&#39;;
+
+$file = &#39;XlsFiles/test.xls&#39;;
+$table = &#39;heavy_metal&#39;;
+$fields = [
+    &#39;category&#39;, &#39;steel&#39;, &#39;steel_size&#39;, &#39;qty&#39;
+];
+
+$result = xls2mysql($config, $file, $table, $fields);
+
+echo &quot;Успешно са импортирани {$result[&#39;imported_rows&#39;]} от {$result[&#39;read_rows&#39;]} прочетени !&quot;;</code></pre>
 
                 </div>
             </div>

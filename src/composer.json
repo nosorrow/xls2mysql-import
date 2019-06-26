@@ -14,7 +14,8 @@
     "autoload": {
         "files": [
             "spreadsheet-reader/php-excel-reader/excel_reader2.php",
-            "spreadsheet-reader/SpreadsheetReader.php"
+            "spreadsheet-reader/SpreadsheetReader.php",
+            "Helpers/Helpers.php"
         ],
         "psr-4": {
             "Adapter\\": "Adapter",
