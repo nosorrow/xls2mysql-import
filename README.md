@@ -1,4 +1,4 @@
-Xlsx2Mysql Iporter
+﻿Xlsx2Mysql Importer
 ---
 
 ###### <b>Конфигуриране връзка към базата данни</b>
