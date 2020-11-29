@@ -24,12 +24,17 @@ class Importer
         try {
             $dbInstanceName = 'default';
 
-            Database::setInstance($config['host'], $config['user'], $config['password'], $config['dbname'], $dbInstanceName);
+            Database::setInstance(
+                $config['host'],
+                $config['user'],
+                $config['password'],
+                $config['dbname'],
+                $dbInstanceName
+            );
 
             $db = Database::getInstance($dbInstanceName);
 
             $this->dbh = $db->getpdo();
-
         } catch (\PDOException $e) {
             echo $e->getMessage();
         }
@@ -49,10 +54,9 @@ class Importer
     {
         try {
             return $this->dbh->exec("TRUNCATE {$this->table}");
-
         } catch (\PDOException $e) {
-            echo "Importer::trucate() Error: " . ($e->getMessage());
-            exit;
+            echo "Importer::trucate() Error: " . $e->getMessage();
+            exit();
         }
     }
 
@@ -72,7 +76,6 @@ class Importer
         }
     }
 
-
     public function fields()
     {
         if (!$this->fields) {
@@ -81,11 +84,13 @@ class Importer
 
         $string['fields'] = implode(', ', $this->fields);
 
-        $string['placeholders'] = rtrim(str_repeat("?, ", count(array_values($this->fields))), ', ');
+        $string['placeholders'] = rtrim(
+            str_repeat("?, ", count(array_values($this->fields))),
+            ', '
+        );
 
         return $string;
     }
-
 
     public function import()
     {
@@ -110,7 +115,6 @@ class Importer
             $params = [];
 
             foreach ($Reader as $row) {
-
                 /*$category = $row[0];
                 $steel = $row[1];
                 $size = $row[2];
@@ -121,9 +125,7 @@ class Importer
                 }
 
                 $stmt->execute($params);
-
                 $iserted_rows++;
-
                 $params = [];
             }
 
@@ -134,15 +136,19 @@ class Importer
             $this->result['imported_rows'] = $iserted_rows;
             $this->result['not_imported'] = $sizeof - $iserted_rows;
             $this->result['errors'] = 0;
-
+            
         } catch (\PDOException $Exception) {
-            $error = "FAILED - " . $Exception->getMessage() . "(" . (int)$Exception->getCode() . ") " .  "\n";
+            $error =
+                "FAILED - " .
+                $Exception->getMessage() .
+                "(" .
+                (int) $Exception->getCode() .
+                ") " .
+                "\n";
             echo $error;
             $this->dbh->rollBack();
             $this->result['errors'] = $error;
-            die ('Data base transaction error! Try again later!');
+            die('Data base transaction error! Try again later!');
         }
-
     }
-
 }
