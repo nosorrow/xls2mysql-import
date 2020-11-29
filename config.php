@@ -7,4 +7,3 @@ return [
     'dbname' => 'lesson',
 
 ];
-
