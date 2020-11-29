@@ -136,7 +136,7 @@ class Importer
             $this->result['imported_rows'] = $iserted_rows;
             $this->result['not_imported'] = $sizeof - $iserted_rows;
             $this->result['errors'] = 0;
-            
+
         } catch (\PDOException $Exception) {
             $error =
                 "FAILED - " .

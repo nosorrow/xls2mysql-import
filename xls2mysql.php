@@ -2,7 +2,7 @@
 
 use Importer\Importer;
 require_once 'src/vendor/autoload.php';
-$config = include_once 'config.php';
+$config = include 'config.php';
 $importer = new Importer($config);
 $importer->file = 'XlsFiles/test.xls';
 $importer->table = 'heavy_metal';
