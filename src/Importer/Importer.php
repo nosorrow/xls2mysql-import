@@ -105,7 +105,7 @@ class Importer
         try {
             $this->dbh->beginTransaction();
 
-            $stmt = $this->dbh->prepare("DELETE FROM heavy_metal");
+            $stmt = $this->dbh->prepare("DELETE FROM $this->table");
 
             $stmt->execute();
 
