@@ -109,7 +109,7 @@ class Importer
 
             $stmt->execute();
 
-            $sql = "INSERT INTO {$this->table} ({$table_info['fields']}) VALUES ({$table_info['placeholders']})";
+            $sql = "INSERT INTO $this->table ({$table_info['fields']}) VALUES ({$table_info['placeholders']})";
 
             $stmt = $this->dbh->prepare($sql);
             $params = [];
